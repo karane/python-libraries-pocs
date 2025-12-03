@@ -1,0 +1,16 @@
+{% set fields = ['name', 'age'] %}
+
+SELECT 
+    {% for f in fields %}
+        {{ f }}
+    {% endfor%}
+FROM users
+WHERE 1=1
+{% if role %}
+  AND role = '{{ role }}'
+{% endif %}
+{% if min_age %}
+  AND age >= {{ min_age }}
+{% endif %}
+ORDER BY id
+LIMIT {{ limit | default(50) }};
